@@ -25,5 +25,31 @@ Just plop it in into your drive, or, into a separate drive, then within Setup, s
 > [!CAUTION]
 > ***Do NOT terminate setup if the script says so. Otherwise, you will brick your current install and will need a complete reinstall.***
 
+## How to use unattended mode
+The script includes unattended mode, which allows you to set up with no user input.
+
+Unattended mode can be used with the ```/\``` parameter and uses ```setup.cfg``` to read the parameters for setup.
+
+### Parameter definitions
+Example ```setup.cfg``` file:
+```
+src=D
+idx=6
+drv=0
+name=User
+pass=Secret
+nomsr=1
+nowre=1
+```
+- ```src``` (required): Defines source drive letter containing the Windows installation media.
+- ```idx``` (required): Defines the specified image index to use.
+- ```drv``` (required): Defines target drive number to install Windows on.
+- ```name``` (required): Defines user name to use.
+- ```pass```: Defines user name password to use.
+- ```nomsr```: Specifies not to create Microsoft Reserved partition.
+- ```nowre```: Specifies not to create Recovery partition.
+> [!CAUTION]
+> ***Due to the constraints of Batch, every line of the ```setup.cfg``` file is executed, even if it does not make a valid parameter. This can introduce Arbitrary Code Execution (ACE), which allows the user to execute custom code and potentially cause harm to your computer.*** To prevent this risk, **please check the ```setup.cfg``` before using unattended mode** as ACE can be used to destroy data, install viruses and more.
 ## Changelog
-- **2025-06-05: Released public pre-release.**
+- **2025-06-05: Released v0.1.0.** Initial public pre-release.
+- **2025-06-21: Released v0.2.0.** Added unattended mode, Microsoft Reserved and Recovery partition support.

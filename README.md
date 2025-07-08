@@ -1,7 +1,7 @@
 # Windows Setup Batch Script
 A Windows Batch script designed to install Windows with the least amount of hassles.
 
-It manually installs Windows with no extra applications needed, while bypassing the OOBE and telemetry prompts too and even debloating it.
+It manually installs Windows with no extra applications needed, while bypassing the OOBE and telemetry prompts and even debloating it! Even non-savy users can use this software!
 
 ## How to use
 > [!WARNING]
@@ -31,7 +31,7 @@ The script includes unattended mode, which allows you to set up with no user inp
 Unattended mode can be used with the ```/\``` parameter and uses ```setup.cfg``` to read the parameters for setup.
 
 ### Parameter definitions
-Example ```setup.cfg``` file:
+All of the available parameters can be seen in the setup file, but here is a example ```setup.cfg``` file:
 ```
 src=D
 idx=6
@@ -48,7 +48,6 @@ nowre=1
 - ```pass```: Defines user name password to use.
 - ```nomsr```: Specifies not to create Microsoft Reserved partition.
 - ```nowre```: Specifies not to create Recovery partition.
-The other parameters are in the setup file.
 > [!CAUTION]
 > ***Due to the constraints of Batch, every line of the ```setup.cfg``` file is executed, even if it does not make a valid parameter. This can introduce Arbitrary Code Execution (ACE), which allows the user to execute custom code and potentially cause harm to your computer.*** To prevent this risk, **please check the ```setup.cfg``` before using unattended mode** as ACE can be used to destroy data, install viruses and more.
 ## Changelog

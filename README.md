@@ -1,7 +1,7 @@
 # Windows Setup Batch Script
 A Windows Batch script designed to install Windows with the least amount of hassles.
 
-It manually installs Windows with no extra applications needed, while bypassing the OOBE and telemetry prompts too.
+It manually installs Windows with no extra applications needed, while bypassing the OOBE and telemetry prompts too and even debloating it.
 
 ## How to use
 > [!WARNING]
@@ -48,8 +48,16 @@ nowre=1
 - ```pass```: Defines user name password to use.
 - ```nomsr```: Specifies not to create Microsoft Reserved partition.
 - ```nowre```: Specifies not to create Recovery partition.
+The other parameters are in the setup file.
 > [!CAUTION]
 > ***Due to the constraints of Batch, every line of the ```setup.cfg``` file is executed, even if it does not make a valid parameter. This can introduce Arbitrary Code Execution (ACE), which allows the user to execute custom code and potentially cause harm to your computer.*** To prevent this risk, **please check the ```setup.cfg``` before using unattended mode** as ACE can be used to destroy data, install viruses and more.
 ## Changelog
 - **2025-06-05: Released v0.1.0.** Initial public pre-release.
-- **2025-06-21: Released v0.2.0.** Added unattended mode, Microsoft Reserved and Recovery partition support.
+- **2025-06-21: Released v0.2.0.**
+  - Added unattended mode.
+  - Added Microsoft Reserved and Recovery partition support.
+- **2025-07-08: Released v0.3.0.**
+  - Added Standard setup mode, along with Advanced mode.
+  - Added debloat support.
+  - Fixed delimiter set for unattended mode.
+  - Revamped user interface.

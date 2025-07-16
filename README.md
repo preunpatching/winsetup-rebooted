@@ -1,21 +1,30 @@
 # Windows Setup Rebooted
 The ultimate way to install Windows with the least amount of hassles!
 
-## How to use
+![An operating system installer flying over the sky.](logo.jpg)
+_Image generated using Flux model with prompt "An operating system installer flying over the sky"._
+
 > [!WARNING]
 > **This is currently a pre-release.** Stuff may not work properly.
 > If you don't want to risk anything, just wait until the full release.
 
-_Requires an existing copy of the Windows installation media._
-Just plop it in into your drive, or, into a separate drive, then within Setup, select "Repair my PC" and then launch the command prompt. Navigate to the drive and do the requested steps.
+## What it can do
+A lot of things! Includes:
+- Not just **operating system installation**, but **full system provision**! You can install your selection of apps and let it rip!
+- **Bypasses the OOBE (Out Of Box Experience) and other prompts**! No need to do things Microsoft forces you to do!
+- **Includes 2 setup modes** - _Standard_ and _Advanced_. Even people who know nothing about this crazy stuff can use it!
+- **Debloating**! Yes, you can uninstall your most hated apps, including Microsoft Store!
+- **Unattended mode**! You can make a configuration file that contains your settings, then launch it and let it do the job for you!
+- And all of this is in **one file**! No external components required.
 
-> [!TIP]
-> If you cannot determine what disk you actually need to use, do the following commands:
-> Leave the script and type in ```diskpart```.
-> Type in the command ```lis dis```.
-> Select the disk you need using ```sel dis [your disk here]``` and then ```del dis```. This will show the details of that disk.
-> If it's the wrong disk, select another disk and see its details. Search until you found the correct disk.
-> Leave diskpart with ```exit```, then go back to setup and use that disk to continue.
+## How to use
+_Requires an existing copy of Windows installation media._
+Just place this script into your Windows installation media or into a separate drive, then within Setup, select _Repair my PC_ and then launch the command prompt. Then, executes the following commands:
+```
+[your drive containing this script]:
+cd [the folder path containing this script]
+setup[.bat] (or whatever it is called)
+```
 
 > [!WARNING]
 > **This will erase all of your data on the selected disk.** Make sure you have backed up all of the important information from it into another medium before continuing.
@@ -36,22 +45,24 @@ Unattended mode can be used with the ```/\``` parameter and uses ```setup.cfg```
 - ```pass```: Defines user name password to use.
 - ```nomsr```: Specifies not to create Microsoft Reserved partition.
 - ```nowre```: Specifies not to create Recovery partition.
-- ```bl1```: Specifies to include common bloat.
-- ```bl2```: Specifies to include Sound Recorder.
-- ```bl3```: Specifies to include Camera.
-- ```bl4```: Specifies to include Clock.
-- ```bl5```: Specifies to include Calculator.
-- ```bl6```: Specifies to include Dev Home.
-- ```bl7```: Specifies to include Phone Link.
-- ```bl8```: Specifies to include Snipping Tool.
-- ```bl9```: Specifies to include Terminal.
-- ```bl10```: Specifies to include Xbox App and gaming features.
-- ```bl11```: Specifies to include Paint.
-- ```bl12```: Specifies to include Microsoft Store.
-- ```bl13```: Specifies to include Microsoft Edge (UWP stub).
-- ```bl14```: Specifies to include Media Player.
-- ```bl15```: Specifies to include Photos.
-- ```bl16```: Specifies to include Notepad.
+- ```bl1```: Specifies to remove common bloat.
+- ```bl2```: Specifies to remove Sound Recorder.
+- ```bl3```: Specifies to remove Camera.
+- ```bl4```: Specifies to remove Clock.
+- ```bl5```: Specifies to remove Calculator.
+- ```bl6```: Specifies to remove Dev Home.
+- ```bl7```: Specifies to remove Phone Link.
+- ```bl8```: Specifies to remove Snipping Tool.
+- ```bl9```: Specifies to remove Terminal.
+- ```bl10```: Specifies to remove Xbox App and gaming features.
+- ```bl11```: Specifies to remove Paint.
+- ```bl12```: Specifies to remove Microsoft Store.
+- ```bl13```: Specifies to remove Microsoft Edge (UWP stub).
+- ```bl14```: Specifies to remove Media Player.
+- ```bl15```: Specifies to remove Photos.
+- ```bl16```: Specifies to remove Notepad.
+- ```dia```: Specifies to download and install apps specified in ```app```.
+- ```app```: Specifies which apps to install. The best way to get it is to go to [Ninite](https://ninite.com/), select your apps, and copy everything between the 2 last forward slashes.
 > [!CAUTION]
 > ***Due to the constraints of Batch, every line of the ```setup.cfg``` file is executed, even if it does not make a valid parameter. This can introduce Arbitrary Code Execution (ACE), which allows the user to execute custom code and potentially cause harm to your computer.*** To prevent this risk, **please check the ```setup.cfg``` before using unattended mode** as ACE can be used to destroy data, install viruses and more.
 ## Changelog
@@ -64,3 +75,6 @@ Unattended mode can be used with the ```/\``` parameter and uses ```setup.cfg```
   - Added debloat support.
   - Fixed delimiter set for unattended mode.
   - Revamped user interface.
+- **2025-07-16: Released v0.4.0.**
+  - Changed the name from _Windows Setup Batch Script_ to _Windows Setup Rebooted_.
+  - Added download and install apps feature.

@@ -19,12 +19,7 @@ A lot of things! Includes:
 
 ## How to use
 _Requires an existing copy of Windows installation media._
-Just place this script into your Windows installation media or into a separate drive, then within Setup, select _Repair my PC_ and then launch the command prompt. Then, executes the following commands:
-```
-[your drive containing this script]:
-cd [the folder path containing this script]
-setup[.bat] (or whatever it is called)
-```
+Just place this script into your Windows installation media or into a separate drive, then within Setup, select _Repair my PC_ and then launch the command prompt and then the script.
 
 > [!WARNING]
 > **This will erase all of your data on the selected disk.** Make sure you have backed up all of the important information from it into another medium before continuing.
@@ -63,18 +58,24 @@ Unattended mode can be used with the ```/\``` parameter and uses ```setup.cfg```
 - ```bl16```: Specifies to remove Notepad.
 - ```dia```: Specifies to download and install apps specified in ```app```.
 - ```app```: Specifies which apps to install. The best way to get it is to go to [Ninite](https://ninite.com/), select your apps, and copy everything between the 2 last forward slashes.
+- ```iapp```: Specifies to install apps in the Apps folder.
+- ```idrv```: Specifies to install drivers in the Drivers folder.
 > [!CAUTION]
 > ***Due to the constraints of Batch, every line of the ```setup.cfg``` file is executed, even if it does not make a valid parameter. This can introduce Arbitrary Code Execution (ACE), which allows the user to execute custom code and potentially cause harm to your computer.*** To prevent this risk, **please check the ```setup.cfg``` before using unattended mode** as ACE can be used to destroy data, install viruses and more.
+
 ## Changelog
-- **2025-06-05: Released v0.1.0.** Initial public pre-release.
-- **2025-06-21: Released v0.2.0.**
-  - Added unattended mode.
-  - Added Microsoft Reserved and Recovery partition support.
+- **2025-09-09: Released v0.5.0.**
+  - Added local apps and drivers installation support.
+  - Fixed permission errors.
+- **2025-07-16: Released v0.4.0.**
+  - Changed the name from _Windows Setup Batch Script_ to _Windows Setup Rebooted_.
+  - Added download and install apps feature.
 - **2025-07-08: Released v0.3.0.**
   - Added Standard setup mode, along with Advanced mode.
   - Added debloat support.
   - Fixed delimiter set for unattended mode.
   - Revamped user interface.
-- **2025-07-16: Released v0.4.0.**
-  - Changed the name from _Windows Setup Batch Script_ to _Windows Setup Rebooted_.
-  - Added download and install apps feature.
+- **2025-06-21: Released v0.2.0.**
+  - Added unattended mode.
+  - Added Microsoft Reserved and Recovery partition support.
+- **2025-06-05: Released v0.1.0.** Initial public pre-release.

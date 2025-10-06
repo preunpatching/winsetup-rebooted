@@ -4,9 +4,9 @@ The ultimate way to install Windows with the least amount of hassles!
 ![An operating system installer flying over the sky.](logo.jpg)
 _Image generated using Flux model with prompt "An operating system installer flying over the sky"._
 
-> [!WARNING]
+> [!NOTE]
 > **This is currently a pre-release.** Stuff may not work properly.
-> If you don't want to risk anything, just wait until the full release.
+> However, it is polished enough for a typical user.
 
 ## What it can do
 A lot of things! Includes:
@@ -15,7 +15,14 @@ A lot of things! Includes:
 - **Includes 2 setup modes** - _Standard_ and _Advanced_. Even people who know nothing about this crazy stuff can use it!
 - **Debloating**! Yes, you can uninstall your most hated apps, including Microsoft Store!
 - **Unattended mode**! You can make a configuration file that contains your settings, then launch it and let it do the job for you!
+- **BIOS/UEFI-CSM support**! Even your ancient x64 PC with a BIOS can run Windows 11!
 - And all of this is in **one file**! No external components required.
+
+## Minimum system requirements using this tool
+- x64 capable CPU
+- ~~4GB~~ 2GB of RAM (DISM will throw an OOM error if with roughly less than 2GB of RAM)
+- ~~UEFI only~~ BIOS or UEFI
+- ~~TPM 2.0 module~~
 
 ## How to use
 _Requires an existing copy of Windows installation media._
@@ -60,10 +67,18 @@ Unattended mode can be used with the ```/\``` parameter and uses ```setup.cfg```
 - ```app```: Specifies which apps to install. The best way to get it is to go to [Ninite](https://ninite.com/), select your apps, and copy everything between the 2 last forward slashes.
 - ```iapp```: Specifies to install apps in the Apps folder.
 - ```idrv```: Specifies to install drivers in the Drivers folder.
+- ```bios```: Specifies to install the system designed for BIOS/UEFI-CSM systems.
 > [!CAUTION]
 > ***Due to the constraints of Batch, every line of the ```setup.cfg``` file is executed, even if it does not make a valid parameter. This can introduce Arbitrary Code Execution (ACE), which allows the user to execute custom code and potentially cause harm to your computer.*** To prevent this risk, **please check the ```setup.cfg``` before using unattended mode** as ACE can be used to destroy data, install viruses and more.
 
+## Planned features
+- [ ] Transition into native Windows GUI binary
+- [ ] More robust error checking
+- [ ] More secure password input field
+
 ## Changelog
+- **2025-10-06: Released v0.6.0.**
+  - Added BIOS/UEFI-CSM system support.
 - **2025-09-09: Released v0.5.0.**
   - Added local apps and drivers installation support.
   - Fixed permission errors.
@@ -78,4 +93,3 @@ Unattended mode can be used with the ```/\``` parameter and uses ```setup.cfg```
 - **2025-06-21: Released v0.2.0.**
   - Added unattended mode.
   - Added Microsoft Reserved and Recovery partition support.
-- **2025-06-05: Released v0.1.0.** Initial public pre-release.

@@ -4,11 +4,7 @@ The ultimate way to install Windows with the least amount of hassles!
 ![An operating system installer flying over the sky.](logo.jpg)
 _Image generated using Flux model with prompt "An operating system installer flying over the sky"._
 
-> [!NOTE]
-> **This is currently a pre-release.** Stuff may not work properly.
-> However, it is polished enough for a typical user.
-
-## What it can do
+# What it can do
 A lot of things! Includes:
 - Not just **operating system installation**, but **full system provision**! You can install your selection of apps and let it rip!
 - **Bypasses the OOBE (Out Of Box Experience) and other prompts**! No need to do things Microsoft forces you to do!
@@ -18,15 +14,15 @@ A lot of things! Includes:
 - **BIOS/UEFI-CSM support**! Even your ancient x64 PC with a BIOS can run Windows 11!
 - And all of this is in **one file**! No external components required.
 
-## Minimum system requirements using this tool
+# Minimum system requirements using this tool
 - x64 capable CPU
 - ~~4GB~~ 2GB of RAM (DISM will throw an OOM error if with roughly less than 2GB of RAM)
-- ~~UEFI only~~ BIOS or UEFI
-- ~~TPM 2.0 module~~
+- ~~UEFI only with Secure Boot~~ BIOS or UEFI
+- ~~TPM 2.0~~
 
-## How to use
+# How to use
 _Requires an existing copy of Windows installation media._
-Just place this script into your Windows installation media or into a separate drive, then within Setup, select _Repair my PC_ and then launch the command prompt and then the script.
+Just place Setup into your Windows installation media or into a separate drive, then within Setup, select _Repair my PC_ and then launch the command prompt and then run Setup.
 
 > [!WARNING]
 > **This will erase all of your data on the selected disk.** Make sure you have backed up all of the important information from it into another medium before continuing.
@@ -35,61 +31,21 @@ Just place this script into your Windows installation media or into a separate d
 > ***Do NOT terminate setup if the script says so. Otherwise, you will brick your current install and will need a complete reinstall.***
 
 ## How to use unattended mode
-The script includes unattended mode, which allows you to set up with no user input.
+Setup includes unattended mode, which allows you to set up Windows without any user input.
 
-Unattended mode can be used with the ```/\``` parameter and uses ```setup.cfg``` to read the parameters for setup.
+First, run Setup with the ```--generate <config.json>``` parameter. This will run Setup, but instead of starting Phase 2 upon finishing, it will generate a config file as ```config.json```. Then, you can run Setup with the ```--unattend <unattend.json>``` parameter, which will read the configuration from ```unattend.json```, verify the parameters, then immediately start installation. If any value is invalid, Setup will not run.
 
-### Parameter definitions
-- ```src``` (required): Defines source drive letter containing the Windows installation media.
-- ```idx``` (required): Defines the specified image index to use.
-- ```drv``` (required): Defines target drive number to install Windows on.
-- ```name``` (required): Defines user name to use.
-- ```pass```: Defines user name password to use.
-- ```nomsr```: Specifies not to create Microsoft Reserved partition.
-- ```nowre```: Specifies not to create Recovery partition.
-- ```bl1```: Specifies to remove common bloat.
-- ```bl2```: Specifies to remove Sound Recorder.
-- ```bl3```: Specifies to remove Camera.
-- ```bl4```: Specifies to remove Clock.
-- ```bl5```: Specifies to remove Calculator.
-- ```bl6```: Specifies to remove Dev Home.
-- ```bl7```: Specifies to remove Phone Link.
-- ```bl8```: Specifies to remove Snipping Tool.
-- ```bl9```: Specifies to remove Terminal.
-- ```bl10```: Specifies to remove Xbox App and gaming features.
-- ```bl11```: Specifies to remove Paint.
-- ```bl12```: Specifies to remove Microsoft Store.
-- ```bl13```: Specifies to remove Microsoft Edge (UWP stub).
-- ```bl14```: Specifies to remove Media Player.
-- ```bl15```: Specifies to remove Photos.
-- ```bl16```: Specifies to remove Notepad.
-- ```dia```: Specifies to download and install apps specified in ```app```.
-- ```app```: Specifies which apps to install. The best way to get it is to go to [Ninite](https://ninite.com/), select your apps, and copy everything between the 2 last forward slashes.
-- ```iapp```: Specifies to install apps in the Apps folder.
-- ```idrv```: Specifies to install drivers in the Drivers folder.
-- ```bios```: Specifies to install the system designed for BIOS/UEFI-CSM systems.
-> [!CAUTION]
-> ***Due to the constraints of Batch, every line of the ```setup.cfg``` file is executed, even if it does not make a valid parameter. This can introduce Arbitrary Code Execution (ACE), which allows the user to execute custom code and potentially cause harm to your computer.*** To prevent this risk, **please check the ```setup.cfg``` before using unattended mode** as ACE can be used to destroy data, install viruses and more.
+> [!NOTE]
+> You cannot combine the ```--generate``` and ```--unattend``` parameters together.
 
-## Planned features
-- [ ] Transition into native Windows GUI binary
-- [ ] More robust error checking
-- [ ] More secure password input field
+# How to build
+In a folder containing ```setup.pyw``` and ```phase3.pyw```, run ```pyinstaller -F --optimize 2 phase3.pyw&&pyinstaller -F --optimize 2 --add-binary "dist\phase3.exe:." setup.pyw```. The binaries will be produced in the dist folder. It has been confirmed to compile under Python 3.13.7 and 3.14.0.
 
-## Changelog
-- **2025-10-06: Released v0.6.0.**
-  - Added BIOS/UEFI-CSM system support.
-- **2025-09-09: Released v0.5.0.**
-  - Added local apps and drivers installation support.
-  - Fixed permission errors.
-- **2025-07-16: Released v0.4.0.**
-  - Changed the name from _Windows Setup Batch Script_ to _Windows Setup Rebooted_.
-  - Added download and install apps feature.
-- **2025-07-08: Released v0.3.0.**
-  - Added Standard setup mode, along with Advanced mode.
-  - Added debloat support.
-  - Fixed delimiter set for unattended mode.
-  - Revamped user interface.
-- **2025-06-21: Released v0.2.0.**
-  - Added unattended mode.
-  - Added Microsoft Reserved and Recovery partition support.
+## Test mode
+To run Setup in test mode, run Setup with the ```--test``` parameter. This will run Setup, but the OS checks will be bypassed, no Terminal or Verifier functions will run, and Phase 2 will not run. It is used purely for testing the GUI to ensure it does not produce any errors.
+
+# Planned features
+- [ ] Bring back Ninite app installation support (removed in v1.0.0)
+- [x] ~~Transition into Windows GUI binary~~ (implemented in v1.0.0)
+- [x] ~~More robust error checking~~ (implemented in v1.0.0)
+- [x] ~~More secure password input field~~ (implemented in v1.0.0)

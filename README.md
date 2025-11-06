@@ -22,7 +22,7 @@ A lot of things! Includes:
 
 # How to use
 _Requires an existing copy of Windows installation media._
-Just place Setup into your Windows installation media or into a separate drive, then within Setup, select _Repair my PC_ and then launch the command prompt and then run Setup.
+Just place Setup into your Windows installation media or into a separate drive, then within Setup, select _Repair my PC_ and then launch the command prompt and then run Setup. **The binaries are for Windows 8 and later only.**
 
 > [!WARNING]
 > **This will erase all of your data on the selected disk.** Make sure you have backed up all of the important information from it into another medium before continuing.
@@ -49,3 +49,10 @@ To run Setup in test mode, run Setup with the ```--test``` parameter. This will 
 - [x] ~~Transition into Windows GUI binary~~ (implemented in v1.0.0)
 - [x] ~~More robust error checking~~ (implemented in v1.0.0)
 - [x] ~~More secure password input field~~ (implemented in v1.0.0)
+
+# FAQ
+## What about Python 3.15?
+It is still **an early developer preview** - I will not maintain support for Python 3.15, likely until it reaches the **release candidate** phase (expected to start at 2026-07-28).
+
+## What about Windows Vista and 7 support?
+This requires **Python 3.8 or earlier**, which is long since the last bugfix update (2021-05-03) and the last security update without binaries (2024-09-06). It may be possible to get binaries working in Python 3.8, but some features that weren't present in Python 3.8 (which may be plenty) may not work at all, requiring a rewrite.
